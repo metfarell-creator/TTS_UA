@@ -1,0 +1,25 @@
+# Налаштування застосунку StyleTTS 2 Ukrainian EXP
+sample_rate: 24000
+text:
+  max_length: 50000
+  chunk_length: 220
+speed:
+  min: 0.6
+  max: 1.4
+  default: 1.0
+  step: 0.05
+paths:
+  voices_dir: voices
+  models_dir: models
+  single_style: filatov.pt
+huggingface:
+  repos:
+    verbalizer:
+      repo_id: skypro1111/mbart-large-50-verbalization
+      folder: models--skypro1111--mbart-large-50-verbalization
+    multi:
+      repo_id: patriotyk/styletts2_ukrainian_multispeaker_hifigan
+      folder: models--patriotyk--styletts2_ukrainian_multispeaker
+    single:
+      repo_id: patriotyk/styletts2_ukrainian_single
+      folder: models--patriotyk--styletts2_ukrainian_single

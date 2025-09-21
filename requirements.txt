@@ -1,0 +1,10 @@
+gradio>=3.50
+huggingface_hub>=0.20
+ipa-uk>=0.2
+numpy>=1.24
+PyYAML>=6.0
+soundfile>=0.12
+styletts2-inference>=0.2
+torch>=2.0
+transformers>=4.35
+ukrainian-word-stress>=1.0
