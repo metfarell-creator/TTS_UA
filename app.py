@@ -96,6 +96,7 @@ MODELS_DIR = os.path.join(ROOT, str(paths_cfg.get("models_dir", "models")))
 SINGLE_STYLE_PATH = os.path.join(ROOT, str(paths_cfg.get("single_style", "filatov.pt")))
 
 os.makedirs(PROMPTS_DIR, exist_ok=True)
+os.makedirs(MODELS_DIR, exist_ok=True)
 
 huggingface_cfg = CONFIG.get("huggingface", {})  # type: ignore[assignment]
 HF_REPOS = {}
@@ -330,7 +331,7 @@ def synthesize(
             elif VOICE_NAMES:
                 style = model_entry["styles"][VOICE_NAMES[0]]
             if style is None:
-                raise gr.Error("Не знайдено стилі в папці 'voices/'.")
+                raise gr.Error("Не знайдено стилі у папці 'voices/'.")
         else:
             style = model_entry["style"]
 

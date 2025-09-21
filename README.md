@@ -10,6 +10,7 @@
 
 ## Швидкий старт
 1. Встановіть залежності з `requirements.txt` (у проєкті використовується PyTorch 2.x, Gradio, PyYAML та бібліотеки Hugging Face).
+   Зверніть увагу, що пакет `styletts2-inference` встановлюється безпосередньо з GitHub, тож потрібен доступ до `git`.
 2. За потреби налаштуйте `config.yml` — у ньому зберігаються межі швидкості, ліміти довжини тексту та шляхи до локальних директорій.
 3. Запустіть `run.bat` (Windows) або `python app.py` — під час першого старту застосунок автоматично завантажить моделі з Hugging Face:
    - `patriotyk/styletts2_ukrainian_multispeaker_hifigan`,
