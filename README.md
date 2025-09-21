@@ -9,33 +9,19 @@
 - Підтримка символу `+` для ручного виставлення наголосу.
 
 ## Швидкий старт
-1. Підготуйте файлову структуру:
-   ```
-   D:/STYLETTS2-UKRAINIANEXP/
-   ├── run.bat
-   ├── app.py
-   ├── verbalizer.py
-   ├── config.yml
-   ├── requirements.txt
-   ├── filatov.pt
-   ├── voices/
-   │   ├── Анастасія Павленко.pt
-   │   ├── Артем Окороков.pt
-   │   └── ...
-   ├── models/
-   │   ├── models--patriotyk--styletts2_ukrainian_multispeaker/
-   │   ├── models--patriotyk--styletts2_ukrainian_single/
-   │   └── models--skypro1111--mbart-large-50-verbalization/
-   └── python-portable/
-   ```
-2. Переконайтеся, що всі моделі й стилі лежать у відповідних папках.
-3. Запустіть `run.bat` (Windows) або `python app.py` у середовищі з потрібними залежностями.
+1. Переконайтеся, що в середовищі встановлено залежності з `requirements.txt`, включно з `huggingface_hub`.
+2. Запустіть `run.bat` (Windows) або `python app.py` — під час першого старту застосунок автоматично завантажить моделі з Hugging Face:
+   - `patriotyk/styletts2_ukrainian_multispeaker_hifigan`,
+   - `patriotyk/styletts2_ukrainian_single`,
+   - `skypro1111/mbart-large-50-verbalization`.
+   Файли кешуються у папці `models/`, повторні запуски відпрацьовують офлайн.
+3. Розмістіть локальні стилі голосів (`*.pt`) у папці `voices/` та файл стилю для single-режиму (`filatov.pt`) у корені проєкту.
 4. Відкрийте адресу, вказану Gradio, у браузері та синтезуйте мовлення.
 
 ## Системні вимоги
 - **Python 3.11** (перевірено на Windows із вбудованим `python-portable`).
 - **PyTorch 2.x** з підтримкою CUDA (якщо використовуєте GPU).
-- Додаткові бібліотеки: `gradio`, `ukrainian-word-stress`, `ipa-uk`, `transformers`, `styletts2_inference` та інші із `requirements.txt`.
+- Додаткові бібліотеки: `gradio`, `ukrainian-word-stress`, `ipa-uk`, `transformers`, `styletts2_inference`, `huggingface_hub` та інші із `requirements.txt`.
 
 ## Особливості реалізації
 - Вербалізатор працює повністю офлайн та автоматично підбирає токенайзер (спершу `AutoTokenizer`, потім fallback на `MBart50TokenizerFast`).

@@ -12,6 +12,7 @@ import torch
 from unicodedata import normalize
 
 from ipa_uk import ipa
+from huggingface_hub import snapshot_download
 from ukrainian_word_stress import Stressifier, StressSymbol
 from styletts2_inference.models import StyleTTS2
 from verbalizer import Verbalizer
@@ -26,15 +27,59 @@ device = "cuda" if torch.cuda.is_available() else "cpu"
 # Paths
 ROOT = os.path.dirname(os.path.abspath(__file__))
 PROMPTS_DIR = os.path.join(ROOT, "voices")
-VERBALIZER_PATH = os.path.join(
-    ROOT, "models", "models--skypro1111--mbart-large-50-verbalization"
-)
-MULTI_MODEL_PATH = os.path.join(
-    ROOT, "models", "models--patriotyk--styletts2_ukrainian_multispeaker"
-)
-SINGLE_MODEL_PATH = os.path.join(
-    ROOT, "models", "models--patriotyk--styletts2_ukrainian_single"
-)
+MODELS_DIR = os.path.join(ROOT, "models")
+HF_REPOS = {
+    "verbalizer": (
+        "skypro1111/mbart-large-50-verbalization",
+        "models--skypro1111--mbart-large-50-verbalization",
+    ),
+    "multi": (
+        "patriotyk/styletts2_ukrainian_multispeaker_hifigan",
+        "models--patriotyk--styletts2_ukrainian_multispeaker",
+    ),
+    "single": (
+        "patriotyk/styletts2_ukrainian_single",
+        "models--patriotyk--styletts2_ukrainian_single",
+    ),
+}
+
+
+def ensure_local_repo(repo_key: str) -> str:
+    repo_id, folder_name = HF_REPOS[repo_key]
+    target_dir = os.path.join(MODELS_DIR, folder_name)
+    os.makedirs(target_dir, exist_ok=True)
+
+    has_files = False
+    try:
+        with os.scandir(target_dir) as entries:
+            has_files = any(entries)
+    except FileNotFoundError:
+        has_files = False
+
+    if has_files:
+        return target_dir
+
+    print(f"[download] fetching '{repo_id}' into '{target_dir}'")
+    try:
+        snapshot_download(
+            repo_id=repo_id,
+            local_dir=target_dir,
+            local_dir_use_symlinks=False,
+            resume_download=True,
+        )
+    except Exception as exc:  # pragma: no cover - network failures surfaced to user
+        raise RuntimeError(
+            "Не вдалося завантажити модель з Hugging Face. "
+            "Переконайтеся у наявності інтернету та доступу до репозиторію "
+            f"'{repo_id}'."
+        ) from exc
+
+    return target_dir
+
+
+VERBALIZER_PATH = ensure_local_repo("verbalizer")
+MULTI_MODEL_PATH = ensure_local_repo("multi")
+SINGLE_MODEL_PATH = ensure_local_repo("single")
 SINGLE_STYLE_PATH = os.path.join(ROOT, "filatov.pt")
 
 
