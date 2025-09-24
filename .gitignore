@@ -1,0 +1,15 @@
+venv/
+sonitranslate_ua/venv/
+__pycache__/
+*.pth
+*.wav
+*.mp4
+*.avi
+temp/
+sonitranslate_ua/temp/*
+!sonitranslate_ua/temp/.gitkeep
+models/*/
+sonitranslate_ua/models/*/
+!sonitranslate_ua/models/styletts2_ua/.gitkeep
+bin/ffmpeg*
+sonitranslate_ua/bin/ffmpeg*

@@ -1,0 +1,12 @@
+asr_model: "large-v3"
+language: "uk"
+device: "cuda"
+compute_type: "float16"
+diarization: false
+
+tts:
+  repo: "patriotyk/styletts2-ukrainian"
+  checkpoint_glob: "*.pth"
+  config_glob: "*config*.y*ml"
+  sample_rate: 24000
+  speed: 1.0
