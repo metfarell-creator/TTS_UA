@@ -1,0 +1,29 @@
+# ---------- CORE ----------
+torch==2.3.1
+torchaudio==2.3.1
+--extra-index-url https://download.pytorch.org/whl/cu121
+
+# ---------- ASR ----------
+whisperx==3.3.4
+ctranslate2==4.5.0
+
+# ---------- TTS ----------
+styletts2==0.1.6
+transformers>=4.40.0
+accelerate
+huggingface_hub
+sentencepiece
+
+# ---------- AUDIO ----------
+pydub
+ffmpeg-python
+soundfile
+numpy
+
+# ---------- UTILITIES ----------
+gradio>=5.0.0
+yt-dlp
+python-dotenv
+srt
+ukrainian-word-stress
+pyyaml
