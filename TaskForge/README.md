@@ -38,6 +38,22 @@ cd server
 cp .env.example .env
 ```
 
+### Quick Start with Docker Compose
+
+The fastest way to spin up the entire stack (PostgreSQL, API, and React UI) is with Docker Compose:
+
+```bash
+docker compose up --build
+```
+
+The services are exposed as follows:
+
+- React UI: [http://localhost:3000](http://localhost:3000)
+- REST API: [http://localhost:5000/api](http://localhost:5000/api)
+- PostgreSQL: `localhost:5432` (database `taskforge`, user/password `taskforge`)
+
+To stop the stack press `Ctrl+C` and run `docker compose down` to remove containers. Database data is stored in a named volume `taskforge_db_data`.
+
 ### Install Dependencies
 
 ```
@@ -67,6 +83,12 @@ npm start
 ```
 
 The React app runs on [http://localhost:3000](http://localhost:3000) and proxies API calls to the backend at `http://localhost:5000` by default.
+
+## Docker Images
+
+- `client/Dockerfile` builds a production-ready bundle served by Nginx.
+- `server/Dockerfile` installs API dependencies and starts the Express server.
+- `docker-compose.yml` orchestrates the database, API, and UI services for local development or lightweight deployment.
 
 ## Database Initialization
 
