@@ -1,0 +1,125 @@
+:root {
+  color-scheme: light dark;
+  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background-color: #0d1117;
+  color: #f0f6fc;
+}
+
+body {
+  margin: 0;
+}
+
+main {
+  min-height: 100vh;
+}
+
+.auth-page {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  padding: 4rem;
+}
+
+.auth-form,
+.auth-page section,
+.dashboard header,
+.dashboard .content > div {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.25);
+}
+
+.auth-form label,
+.task-form label {
+  display: block;
+  font-weight: 600;
+  margin-top: 1rem;
+}
+
+.auth-form input,
+.task-form input,
+.task-form textarea {
+  width: 100%;
+  padding: 0.75rem;
+  border-radius: 8px;
+  border: none;
+  margin-top: 0.5rem;
+}
+
+button {
+  cursor: pointer;
+  padding: 0.75rem 1.25rem;
+  border-radius: 8px;
+  border: none;
+  font-weight: 600;
+  margin-top: 1.25rem;
+}
+
+button.secondary {
+  background: transparent;
+  border: 1px solid rgba(240, 246, 252, 0.2);
+  color: inherit;
+}
+
+button.danger {
+  background: #f85149;
+  color: #fff;
+}
+
+button.switch {
+  display: block;
+  width: 100%;
+  background: transparent;
+  border: 1px dashed rgba(240, 246, 252, 0.3);
+}
+
+.error {
+  color: #f85149;
+  margin-top: 1rem;
+}
+
+.dashboard {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  padding: 2rem 5vw 4rem;
+}
+
+.dashboard header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.dashboard .content {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+}
+
+.task-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.task-list li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+
+.task-list li.completed h4 {
+  text-decoration: line-through;
+  opacity: 0.6;
+}
+
+.task-actions {
+  display: flex;
+  gap: 0.5rem;
+}

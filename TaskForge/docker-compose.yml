@@ -1,0 +1,51 @@
+version: "3.9"
+
+services:
+  db:
+    image: postgres:15-alpine
+    environment:
+      POSTGRES_DB: taskforge
+      POSTGRES_USER: taskforge
+      POSTGRES_PASSWORD: taskforge
+    volumes:
+      - taskforge_db_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U taskforge -d taskforge"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+    ports:
+      - "5432:5432"
+
+  server:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    environment:
+      PORT: 5000
+      JWT_SECRET: supersecretjwt
+      DB_NAME: taskforge
+      DB_USER: taskforge
+      DB_PASSWORD: taskforge
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_LOGGING: "false"
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - "5000:5000"
+
+  client:
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+      args:
+        REACT_APP_API_URL: http://localhost:5000/api
+    depends_on:
+      - server
+    ports:
+      - "3000:80"
+
+volumes:
+  taskforge_db_data:
